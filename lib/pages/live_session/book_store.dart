@@ -1,3 +1,4 @@
+import 'package:device_manager_ui/pages/live_session/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_manager_ui/data/bookData.dart';
 import 'package:device_manager_ui/components/myBook.dart';
@@ -13,22 +14,29 @@ class MyBookStore extends StatefulWidget {
 
 class _MyBookStoreState extends State<MyBookStore> {
   List<BookData> booksRecommendation = [
-    BookData('assets/r1.jpg', 'Papillion: Based on true story', 5.6),
-    BookData('assets/r2.jpg', 'Melorina', 4.5),
-    BookData('assets/r3.jpg', 'Am I Small?', 7.3),
-    BookData('assets/r4.jpg', 'Beyond Amen', 6.2),
+    BookData('assets/r1.jpg', 'Papillion: Based on true story', 5.6,
+        'Mark Sulek', '2h 45m'),
+    BookData('assets/r2.jpg', 'Melorina', 4.5, 'Mergeta Besufikad', '2h 10m'),
+    BookData('assets/r3.jpg', 'Am I Small?', 7.3, 'Selam Beyene', '4h 30m'),
+    BookData('assets/r4.jpg', 'Beyond Amen', 6.2, 'Markos Ayele', '3h 50m'),
   ];
   List<BookData> booksNew = [
-    BookData('assets/n1.jpg', 'Rich Dad Poor Dad', 5.6),
-    BookData('assets/n2.jpg', 'Yesinibit Kelemat', 4.5),
-    BookData('assets/n3.jpg', 'The Past is Rising', 7.3),
-    BookData('assets/n4.jpg', 'Cogheart', 6.2),
+    BookData(
+        'assets/n1.jpg', 'Rich Dad Poor Dad', 5.6, 'Robert Kiyosaki', '6h 30m'),
+    BookData(
+        'assets/n2.jpg', 'Yesinibit Kelemat', 4.5, 'Tamrat Markos', '4h 50m'),
+    BookData(
+        'assets/n3.jpg', 'The Past is Rising', 7.3, 'Jack Carter', '1h 40m'),
+    BookData('assets/n4.jpg', 'Cogheart', 6.2, 'Peter Bunzl', '3h 10m'),
   ];
   List<BookData> booksTrending = [
-    BookData('assets/t1.jpg', 'Born a Crime by Trevor Noah', 7.5),
-    BookData('assets/t2.jpg', 'Evolution of the Learning Brain', 8.2),
-    BookData('assets/t3.jpg', 'Lela Sew', 5.1),
-    BookData('assets/t4.jpg', 'Tebegna Ewnetoch', 4.7),
+    BookData('assets/t1.jpg', 'Born a Crime by Trevor Noah', 7.5, 'Trevor Noah',
+        '2h 10m'),
+    BookData('assets/t2.jpg', 'Evolution of the Learning Brain', 8.2,
+        'Callum Dawson', '8h 30m'),
+    BookData('assets/t3.jpg', 'Lela Sew', 5.1, 'Atnafu Demsie', '2h 10m'),
+    BookData(
+        'assets/t4.jpg', 'Tebegna Ewnetoch', 4.7, 'Bewketu Seyoum', '5h 10m'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -54,20 +62,27 @@ class _MyBookStoreState extends State<MyBookStore> {
           gap: 8,
           iconSize: 35,
           tabBackgroundColor: Colors.grey.withOpacity(.2),
-          tabs: const [
-            GButton(
+          tabs: [
+            const GButton(
               icon: Icons.newspaper_outlined,
             ),
-            GButton(
+            const GButton(
               icon: Icons.auto_stories_outlined,
             ),
-            GButton(
+            const GButton(
               icon: Icons.home_outlined,
             ),
             GButton(
               icon: Icons.book_outlined,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const MyAnimation();
+                  }),
+                );
+              },
             ),
-            GButton(
+            const GButton(
               icon: Icons.person_2_outlined,
             ),
           ],
@@ -236,7 +251,8 @@ class _MyBookStoreState extends State<MyBookStore> {
                   scrollDirection: Axis.horizontal,
                   itemCount: booksRecommendation.length,
                   itemBuilder: (context, index) {
-                    return myBookWithRating(booksRecommendation[index]);
+                    return myBookWithRating(
+                        booksRecommendation[index], context);
                   },
                 ),
               ),
@@ -258,7 +274,7 @@ class _MyBookStoreState extends State<MyBookStore> {
                   scrollDirection: Axis.horizontal,
                   itemCount: booksNew.length,
                   itemBuilder: (context, index) {
-                    return myBook(booksNew[index]);
+                    return myBook(booksNew[index], context);
                   },
                 ),
               ),
@@ -280,7 +296,7 @@ class _MyBookStoreState extends State<MyBookStore> {
                   scrollDirection: Axis.horizontal,
                   itemCount: booksTrending.length,
                   itemBuilder: (context, index) {
-                    return myBookWithRating(booksTrending[index]);
+                    return myBookWithRating(booksTrending[index], context);
                   },
                 ),
               ),
