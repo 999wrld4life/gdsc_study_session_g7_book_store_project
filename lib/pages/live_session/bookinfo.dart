@@ -7,7 +7,10 @@ import 'package:device_manager_ui/components/myBookWithRating.dart';
 // ignore: must_be_immutable
 class BookInfo extends StatelessWidget {
   final BookData book;
-  BookInfo({required this.book, super.key});
+  BookInfo({
+    required this.book,
+    super.key,
+  });
   List<BookData> booksRelated = [
     BookData('assets/t1.jpg', 'Born a Crime by Trevor Noah', 7.5, 'Trevor Noah',
         '2h 10m'),

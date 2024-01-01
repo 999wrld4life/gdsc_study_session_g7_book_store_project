@@ -1,16 +1,15 @@
 import 'package:device_manager_ui/pages/live_session/bookinfo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../data/bookData.dart';
 
 Widget myBook(BookData book, BuildContext context) {
   return GestureDetector(
     onTap: () {
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) {
-          return BookInfo(
-            book: book,
-          );
-        }),
+      Get.to(
+        () => BookInfo(book: book),
+        transition: Transition.circularReveal,
+        duration: const Duration(seconds: 2),
       );
     },
     child: Container(

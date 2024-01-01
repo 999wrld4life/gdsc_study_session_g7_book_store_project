@@ -1,5 +1,6 @@
 import 'package:device_manager_ui/pages/live_session/book_store.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class MyAnimation extends StatelessWidget {
@@ -15,10 +16,9 @@ class MyAnimation extends StatelessWidget {
           const SizedBox(height: 40),
           GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return const MyBookStore();
-              }));
+              Get.to(() => const MyBookStore(),
+                  transition: Transition.fade,
+                  duration: const Duration(seconds: 1));
             },
             child: Container(
                 padding: const EdgeInsets.all(15),
